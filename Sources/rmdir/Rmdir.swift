@@ -26,7 +26,11 @@ struct Rmdir: ParsableCommand {
             let path = arg.hasPrefix("-") ? "./\(arg)" : arg
 
             var isDir: ObjCBool = false
-            guard fm.fileExists(atPath: path, isDirectory: &isDir), isDir.boolValue else {
+            guard fm.fileExists(atPath: path, isDirectory: &isDir) else {
+                fputs("rmdir: \(arg): No such file or directory\n", stderr)
+                throw ExitCode.failure
+            }
+            guard isDir.boolValue else {
                 fputs("rmdir: \(arg): Not a directory\n", stderr)
                 throw ExitCode.failure
             }
