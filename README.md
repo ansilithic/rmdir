@@ -5,14 +5,14 @@ A drop-in replacement for `/usr/bin/rmdir` that moves directories to the macOS T
 ## Install
 
 ```sh
-swift build -c release
-cp .build/release/rmdir ~/.local/bin/
+brew install ansilithic/tap/rmdir
 ```
 
-Or with Make:
+Or build from source:
 
 ```sh
-make build install
+swift build -c release
+cp .build/release/rmdir ~/.local/bin/
 ```
 
 Ensure `~/.local/bin` is earlier in your `$PATH` than `/usr/bin` to shadow the system `rmdir`.
