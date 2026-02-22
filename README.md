@@ -1,8 +1,6 @@
-# rmdir
+# rmdir — safe directory removal for macOS
 
-Move directories to Trash instead of permanently deleting them.
-
-Drop-in replacement for `/usr/bin/rmdir` that delegates to `/usr/bin/trash`, so deleted directories are recoverable from the macOS Trash.
+A drop-in replacement for `/usr/bin/rmdir` that moves directories to the macOS Trash instead of permanently deleting them. Built in Swift, delegates to `/usr/bin/trash` so every deletion is recoverable.
 
 ## Install
 
