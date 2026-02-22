@@ -26,11 +26,6 @@ rmdir dir1 dir2 dir3
 
 Validates that each argument is an existing directory before trashing. Errors on missing paths or non-directories.
 
-## Requirements
-
-- macOS 14+ (Sonoma)
-- Swift 6.0
-
 ## License
 
 MIT
