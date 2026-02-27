@@ -1,6 +1,14 @@
-# rmdir — safe directory removal for macOS
+# rmdir
 
-A drop-in replacement for `/usr/bin/rmdir` that moves directories to the macOS Trash instead of permanently deleting them. Built in Swift, delegates to `/usr/bin/trash` so every deletion is recoverable.
+![Swift 6.0](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
+![macOS 14+](https://img.shields.io/badge/macOS-14%2B-000000?logo=apple&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue)
+
+Drop-in `rmdir` replacement for macOS that moves directories to Trash instead of permanently deleting them.
+
+## How it works
+
+`rmdir` delegates to `/usr/bin/trash` so every deletion is recoverable from the macOS Trash. Each argument is validated as an existing directory before trashing — non-directories and missing paths produce errors on stderr.
 
 ## Install
 
@@ -8,23 +16,32 @@ A drop-in replacement for `/usr/bin/rmdir` that moves directories to the macOS T
 brew install ansilithic/tap/rmdir
 ```
 
-Or build from source:
+Or build from source (requires Xcode and macOS 14+):
 
 ```sh
-swift build -c release
-cp .build/release/rmdir /usr/local/bin/
+make build && make install
 ```
 
-Ensure `/usr/local/bin` is earlier in `$PATH` than `/usr/bin` to shadow the system `rmdir`.
+Ensure `/usr/local/bin` appears before `/usr/bin` in `$PATH` to shadow the system `rmdir`.
 
 ## Usage
 
-```sh
-rmdir old-project/
-rmdir dir1 dir2 dir3
+```
+rmdir [--] directory ...
 ```
 
-Validates that each argument is an existing directory before trashing. Errors on missing paths or non-directories.
+### Examples
+
+```sh
+# Move a directory to Trash
+rmdir old-project/
+
+# Multiple directories at once
+rmdir dir1 dir2 dir3
+
+# Handle directory names starting with -
+rmdir -- -temp-dir
+```
 
 ## License
 
