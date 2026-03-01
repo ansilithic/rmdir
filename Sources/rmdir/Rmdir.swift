@@ -14,15 +14,29 @@ struct Rmdir: ParsableCommand {
     var args: [String]
 
     func run() throws {
-        guard !args.isEmpty else {
+        var dirs: [String] = []
+        var pastDoubleDash = false
+
+        for arg in args {
+            if pastDoubleDash {
+                dirs.append(arg)
+            } else if arg == "--" {
+                pastDoubleDash = true
+            } else if arg.hasPrefix("-") {
+                continue
+            } else {
+                dirs.append(arg)
+            }
+        }
+
+        guard !dirs.isEmpty else {
             fputs("usage: rmdir directory ...\n", stderr)
             throw ExitCode.failure
         }
 
         let fm = FileManager.default
 
-        for arg in args {
-            // Prefix with ./ if it starts with - to avoid trash misinterpreting it
+        for arg in dirs {
             let path = arg.hasPrefix("-") ? "./\(arg)" : arg
 
             var isDir: ObjCBool = false
