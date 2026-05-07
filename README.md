@@ -12,11 +12,7 @@ Drop-in `rmdir` replacement for macOS that moves directories to Trash instead of
 
 ## Install
 
-```sh
-brew install ansilithic/tap/rmdir
-```
-
-Or build from source (requires Xcode and macOS 14+):
+Build from source (requires Xcode and macOS 14+):
 
 ```sh
 make build && make install
